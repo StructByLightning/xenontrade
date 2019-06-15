@@ -90,17 +90,22 @@ class Whisper {
   }
 
   formatCurrencyName(currencyName) {
+    var matchedCurrency = "";
+    var matchedAbbr = "";
     for(var currency in CurrencyAbbreviations) {
       for(var abbrIndex in CurrencyAbbreviations[currency]) {
         var abbr = CurrencyAbbreviations[currency][abbrIndex];
 
         if(currencyName.toLowerCase().includes(abbr.toLowerCase())) {
-          return currency;
+          if (matchedAbbr.length < abbr.length){
+            matchedCurrency = currency;
+            matchedAbbr = abbr;
+          }
         }
       }
     }
 
-    return currencyName;
+    return matchedCurrency;
   }
 
   getDefaultTradeInfo() {
